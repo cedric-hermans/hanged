@@ -1,3 +1,7 @@
+import random
+
+words = ["test", "python", "hangman"]
+
 class Game:
     def __init__(self, word):
         self.word = word
@@ -5,6 +9,10 @@ class Game:
         self.isRunning = True
 
 print("""Welcome to Hanged!
-------------------
-Press [S]tart to begin a new game""")
-game = Game("test")
+******************""")
+
+game = Game(random.choice(words))
+print("We got a word ready for you")
+print(game.word.replace(game.word, "_"*len(game.word)))
+
+

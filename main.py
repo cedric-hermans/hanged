@@ -8,7 +8,7 @@ class Game:
         self.displayWord = ""
         self.guessedCharacters = []
         self.guessCount = 0
-        self.isRunning = True
+        self.is_running = True
 
     def guess_character(self, guess):
         count = 0
@@ -21,9 +21,17 @@ class Game:
         elif count > 1:
             print("You got", count, "right characters")
         else:
+            self.guessCount+=1
             self.guessedCharacters.append(guess)
             print("You guessed wrong")
             print("Guessed characters", self.guessedCharacters)
+
+        self.check_for_win()
+        print(self.displayWord)
+
+    def check_for_win(self):
+        if self.displayWord == self.word:
+            self.is_running = False
 
 print("""Welcome to Hanged!
 ******************""")
@@ -33,10 +41,14 @@ print("We got a word ready for you")
 game.displayWord = game.word.replace(game.word, "_"*len(game.word))
 print(game.displayWord)
 
-while game.guessCount <= 7:
+while game.guessCount < 7 and game.is_running:
     print("Guess a letter:")
     player_guess = input()
     game.guess_character(player_guess)
-    print(game.displayWord)
+
+if game.guessCount < 7:
+    print("You won!")
+else:
+    print("Ales, you got hanged..")
 
 

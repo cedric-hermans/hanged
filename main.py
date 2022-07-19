@@ -6,8 +6,24 @@ class Game:
     def __init__(self, word):
         self.word = word
         self.displayWord = ""
+        self.guessedCharacters = []
         self.guessCount = 0
         self.isRunning = True
+
+    def guess_character(self, guess):
+        count = 0
+        for i in enumerate(self.word):
+            if i[1] == guess:
+                count += 1
+                self.displayWord = self.displayWord[0:i[0]] + guess + self.displayWord[i[0] + 1:]
+        if count == 1:
+            print("You got" , count, "right character")
+        elif count > 1:
+            print("You got", count, "right characters")
+        else:
+            self.guessedCharacters.append(guess)
+            print("You guessed wrong")
+            print("Guessed characters", self.guessedCharacters)
 
 print("""Welcome to Hanged!
 ******************""")
@@ -19,13 +35,8 @@ print(game.displayWord)
 
 while game.guessCount <= 7:
     print("Guess a letter:")
-    guess = input()
-    i = game.word.find(guess)
-    if i == -1:
-        print("Letter not found")
-    else:
-        print("Letter found")
-        game.displayWord = game.displayWord[0:i] + guess + game.displayWord[i+1:]
-        print(game.displayWord)
+    player_guess = input()
+    game.guess_character(player_guess)
+    print(game.displayWord)
 
 

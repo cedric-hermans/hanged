@@ -25,6 +25,7 @@ class Game:
             self.guessedCharacters.append(guess)
             print("You guessed wrong")
             print("Guessed characters", self.guessedCharacters)
+        print(self.draw_sequence(self.guessCount))
 
         self.check_for_win()
         print(self.displayWord)
@@ -32,6 +33,67 @@ class Game:
     def check_for_win(self):
         if self.displayWord == self.word:
             self.is_running = False
+
+    def draw_sequence(self, count):
+        match count:
+            case 0:
+                return ""
+            case 1:
+                return """ 
+ 
+ 
+ 
+ 
+ 
+/ \\ """
+            case 2:
+                return """ 
+ |        
+ |       
+ |      
+ |      
+ |
+/ \\ """
+            case 3:
+                return """ ----------
+ |        
+ |       
+ |      
+ |       
+ |
+/ \\ """
+            case 4:
+                return """ ----------
+ |        |
+ |        
+ |       
+ |     
+ |
+/ \\ """
+            case 5:
+                return """ ----------
+ |        |
+ |        0
+ |       
+ |      
+ |
+/ \\ """
+            case 6:
+                return """ ----------
+ |        |
+ |        0
+ |       /|\\
+ |       
+ |
+/ \\ """
+            case 7:
+                return """ ----------
+ |        |
+ |        0
+ |       /|\\
+ |       / \\
+ |
+/ \\ """
 
 print("""Welcome to Hanged!
 ******************""")
@@ -50,5 +112,6 @@ if game.guessCount < 7:
     print("You won!")
 else:
     print("Ales, you got hanged..")
+    print("The word was", game.word)
 
 

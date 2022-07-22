@@ -1,6 +1,9 @@
-import random
+import requests
+import json
 
-words = ["test", "python", "hangman"]
+request = requests.get("https://random-words-api.vercel.app/word")
+json_data = request.json()
+word = json_data[0]["word"]
 
 class Game:
     def __init__(self, word):
@@ -103,7 +106,7 @@ class Game:
 print("""Welcome to Hanged!
 ******************""")
 
-game = Game(random.choice(words))
+game = Game(word)
 print("We got a word ready for you")
 game.displayWord = game.word.replace(game.word, "_"*len(game.word))
 print(game.displayWord)

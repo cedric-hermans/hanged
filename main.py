@@ -8,6 +8,7 @@ class Game:
         self.displayWord = ""
         self.guessedCharacters = []
         self.guessCount = 0
+        self.score = 0
         self.is_running = True
 
     def guess_character(self, guess):
@@ -15,6 +16,7 @@ class Game:
         for i in enumerate(self.word):
             if i[1] == guess:
                 count += 1
+                self.score += 20
                 self.displayWord = self.displayWord[0:i[0]] + guess + self.displayWord[i[0] + 1:]
         if count == 1:
             print("You got" , count, "right character")
@@ -22,6 +24,7 @@ class Game:
             print("You got", count, "right characters")
         else:
             self.guessCount+=1
+            self.score -= 10
             self.guessedCharacters.append(guess)
             print("You guessed wrong")
             print("Guessed characters", self.guessedCharacters)
@@ -33,6 +36,8 @@ class Game:
     def check_for_win(self):
         if self.displayWord == self.word:
             self.is_running = False
+            if self.guessCount == 0:
+                self.score += 100
 
     def draw_sequence(self, count):
         match count:
@@ -113,5 +118,7 @@ if game.guessCount < 7:
 else:
     print("Ales, you got hanged..")
     print("The word was", game.word)
+
+print("You scored", game.score, "points")
 
 

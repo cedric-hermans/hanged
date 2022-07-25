@@ -30,8 +30,9 @@ class Game:
             self.score -= 10
             self.guessedCharacters.append(guess)
             print("You guessed wrong")
-            print("Guessed characters", self.guessedCharacters)
+
         print(self.draw_sequence(self.guessCount))
+        print("Guessed characters", self.guessedCharacters)
 
         self.check_for_win()
         print(self.displayWord)
@@ -125,7 +126,7 @@ while game.guessCount < 7 and game.is_running:
 if game.guessCount < 7:
     print("You won!")
 else:
-    print("Ales, you got hanged..")
+    print("Alas, you got hanged..")
     print("The word was", game.word)
 
 print("You scored", game.score, "points")

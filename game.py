@@ -1,39 +1,35 @@
 class Game:
     def __init__(self, word):
         self.word = word
-        self.displayWord = ""
-        self.guessedCharacters = []
-        self.guessCount = 0
+        self.display_word = ""
+        self.guessed_characters = []
+        self.guess_count = 0
         self.score = 0
         self.is_running = True
 
     def guess_character(self, guess):
-        count = 0
+        hit = False
         for i in enumerate(self.word):
             if i[1] == guess:
-                count += 1
+                hit = True
                 self.score += 20
-                self.displayWord = self.displayWord[0:i[0]] + guess + self.displayWord[i[0] + 1:]
-        if count == 1:
-            print("You got", count, "right character")
-        elif count > 1:
-            print("You got", count, "right characters")
-        else:
-            self.guessCount += 1
+                self.display_word = self.display_word[0:i[0]] + guess + self.display_word[i[0] + 1:]
+        if hit is False:
+            self.guess_count += 1
             self.score -= 10
-            self.guessedCharacters.append(guess)
+            self.guessed_characters.append(guess)
             print("You guessed wrong")
 
-        print(self.draw_sequence(self.guessCount))
-        print("Guessed characters", self.guessedCharacters)
+        print(self.draw_sequence(self.guess_count))
+        print("Guessed characters", self.guessed_characters)
 
         self.check_for_win()
-        print(self.displayWord)
+        print(self.display_word)
 
     def check_for_win(self):
-        if self.displayWord == self.word:
+        if self.display_word == self.word:
             self.is_running = False
-            if self.guessCount == 0:
+            if self.guess_count == 0:
                 self.score += 100
 
     def draw_sequence(self, count):

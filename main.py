@@ -1,13 +1,22 @@
+import random
+
 import game
 import requests
 import json
 
+words = ["python", "build", "education"]
+
 print("""Welcome to Hanged!
 ******************""")
 
-request = requests.get("https://random-words-api.vercel.app/word")
-json_data = request.json()
-word = json_data[0]["word"].lower()
+try:
+    request = requests.get("https://random-words-api.vercel.app/word")
+    json_data = request.json()
+    word = json_data[0]["word"].lower()
+except:
+    print("Can't connect to online dictionary. Choosing random word from local list.")
+    word = random.choice(words)
+
 game = game.Game(word)
 print("We got a word ready for you")
 game.display_word = game.word.replace(game.word, "_"*len(game.word))
